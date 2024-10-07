@@ -1,0 +1,264 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+::selection {
+    background-color: #ff5b5b;
+    color: white; /* Optional: Change the text color too */
+}
+
+header {
+    margin-top: 2.5rem;
+    margin-left: 9rem; /* Use percentage for responsive design */
+    font-size: 3.5rem;
+    color: rgb(255, 0, 0);
+    display: inline-block; /* Adjusts header to fit content */
+}
+
+header:hover {
+    text-shadow: 0 0 10px rgb(217, 255, 0);
+}
+
+.nav-head {
+    font-size: 1.5rem;
+    display: flex;
+    gap: 30px;
+    margin-top: -70px;
+    margin-left: 65rem;
+}
+
+.nav-head a {
+    position: relative;
+    color: rgb(255, 213, 0);
+    text-decoration: none;
+    padding: 10px 0; /* Adjusted padding to reduce overall spacing */
+}
+
+.nav-head a div {
+    display: inline-block;
+    padding: 0; /* Removed extra padding from the div */
+}
+
+.nav-head a div::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: rgb(255, 234, 0); /* Underline color */
+    left: 0;
+    bottom: 0; /* Align the underline close to the text */
+    transition: width 0.3s ease-in-out;
+}
+
+.nav-head a:hover div::after {
+    width: 100%;
+}
+
+.nav-head a:hover {
+    color: red;
+}
+
+.nav-head a:hover div::after {
+    background: red; /* Underline changes to red on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    header {
+        font-size: 2.5rem; /* Reduce header size on smaller screens */
+        margin-left: 5%; /* Adjust margin for smaller screens */
+        text-align: center; /* Center header text */
+    }
+
+    .nav-head {
+        flex-direction: row; /* Keep nav items horizontal */
+        align-items: center; /* Center nav items vertically */
+        margin-top: 1rem; /* Add some space above */
+    }
+
+    .nav-head a {
+        font-size: 1.2rem; /* Adjust nav item size for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        font-size: 2rem; /* Further reduce header size */
+    }
+
+    .nav-head a {
+        font-size: 1rem; /* Further reduce nav item size */
+    }
+}
+
+.body-main{
+    color: #3c3c3c;
+    font-size: 30px;
+    margin-left: 10rem;
+    margin-top: 10rem;
+
+  }
+  
+  .span-x1 {
+    background-color: #ff4141;
+    color: #fff;
+    border-radius: 12px;
+  }
+  
+  .body-p2 {
+    font-size: 30px;
+    left: 10%;
+    color: #3c3c3c;
+  }
+  
+  .span-x2::before {
+    color: #4b41ff;
+    content: "Developer ⚒";
+    animation: animate infinite 7s;
+  }
+  
+  @keyframes animate { 
+    
+    0% { 
+        content: "Developer ⚒";
+        color: #4b41ff;
+    } 
+  
+    30% { 
+        content: "Designer 🎨"; 
+        color: #ffde06;
+    } 
+  
+    55% { 
+        content: "Video Editor 📺"; 
+        color: #ff418a;
+    }
+
+    80% {
+        content: "Cinematographer  🎥";
+        color: #ff5500;
+    }
+  } 
+
+.arrow {
+    transform: scaleX(-1);
+    margin-left: 8rem;
+    z-index: -1;
+    margin-top: -4rem;
+}
+
+h3 {
+    font-size: 40px;
+    margin-left: 9rem;
+}
+
+h4 {
+    font-size: 35px;
+    margin-top: 1rem;
+}
+
+.edit-box {
+    margin-top: -3rem;
+    margin-left: 15rem;
+    background-color: #fff; /* White background */
+    border: 2px solid red; /* Red stroke/border */
+    border-radius: 15px; /* Rounded corners */
+    padding: 30px; /* Padding inside the box */
+    box-shadow: 10px 10px 0px #ffde06; /* Yellow shadow at bottom-right */
+    max-width: 300px; /* Adjust width as needed */
+    position: relative; /* For positioning elements inside */
+}
+
+.text {
+    color: #ff5500;
+    margin-left: 5rem;
+    margin-top: -2rem;
+}
+
+.gfx-box {
+    margin-top: -3rem;
+    margin-left: 50rem;
+    background-color: #fff; 
+    border: 2px solid red; 
+    border-radius: 15px; 
+    padding: 30px; 
+    box-shadow: 10px 10px 0px #ffde06; 
+    max-width: 300px; 
+    position: relative; 
+}
+
+.arrow-rg {
+    margin-left: 70rem;
+    z-index: -1;
+    margin-top: -9rem;
+}
+
+.arrow {
+    transform: scaleX(-1);
+    margin-left: 8rem;
+    z-index: -1;
+    margin-top: -4rem;
+}
+
+.code-box {
+    margin-top: -3rem;
+    margin-left: 15rem;
+    background-color: #fff; /* White background */
+    border: 2px solid red; /* Red stroke/border */
+    border-radius: 15px; /* Rounded corners */
+    padding: 30px; /* Padding inside the box */
+    box-shadow: 10px 10px 0px #ffde06; /* Yellow shadow at bottom-right */
+    max-width: 300px; /* Adjust width as needed */
+    position: relative; /* For positioning elements inside */
+}
+
+.footer-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+.text-left {
+    margin-right: 20px; /* Adjust text slightly to the right */
+    text-align: left;
+    font-size: 1rem;
+}
+
+.social {
+    display: flex;
+    align-items: center; /* Align icons vertically */
+    gap: 15px;
+}
+
+.social a {
+    display: inline-block;
+    transition: transform 0.2s, color 0.2s;
+}
+
+.social a:hover {
+    transform: scale(1.1);
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.twitter-icon {
+    width: 25px;
+    height: 25px;
+}
+
+.github-icon {
+    width: 30px;
+    height: 30px;
+}
+
+.social a:hover img {
+    filter: brightness(0) saturate(100%) invert(18%) sepia(86%) saturate(7231%) hue-rotate(1deg) brightness(94%) contrast(130%);
+}
