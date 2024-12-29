@@ -7,15 +7,15 @@ body {
 
 ::selection {
     background-color: #ff5b5b;
-    color: white; /* Optional: Change the text color too */
+    color: white;
 }
 
 header {
-    margin-top: 2.5rem;
-    margin-left: 9rem; /* Use percentage for responsive design */
+    margin: 2.5rem auto; /* Center horizontally */
     font-size: 3.5rem;
     color: rgb(255, 0, 0);
-    display: inline-block; /* Adjusts header to fit content */
+    display: block; /* Ensure proper spacing for mobile */
+    text-align: center; /* Center header on all screens */
 }
 
 header:hover {
@@ -25,21 +25,20 @@ header:hover {
 .nav-head {
     font-size: 1.5rem;
     display: flex;
-    gap: 30px;
-    margin-top: -70px;
-    margin-left: 65rem;
+    gap: 20px;
+    margin-top: 1rem;
+    justify-content: center; /* Center navigation links */
 }
 
 .nav-head a {
     position: relative;
     color: rgb(255, 213, 0);
     text-decoration: none;
-    padding: 10px 0; /* Adjusted padding to reduce overall spacing */
+    padding: 10px 0;
 }
 
 .nav-head a div {
     display: inline-block;
-    padding: 0; /* Removed extra padding from the div */
 }
 
 .nav-head a div::after {
@@ -47,9 +46,9 @@ header:hover {
     position: absolute;
     width: 0;
     height: 2px;
-    background: rgb(255, 234, 0); /* Underline color */
+    background: rgb(255, 234, 0);
     left: 0;
-    bottom: 0; /* Align the underline close to the text */
+    bottom: 0;
     transition: width 0.3s ease-in-out;
 }
 
@@ -62,177 +61,105 @@ header:hover {
 }
 
 .nav-head a:hover div::after {
-    background: red; /* Underline changes to red on hover */
+    background: red;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    header {
-        font-size: 2.5rem; /* Reduce header size on smaller screens */
-        margin-left: 5%; /* Adjust margin for smaller screens */
-        text-align: center; /* Center header text */
-    }
-
-    .nav-head {
-        flex-direction: row; /* Keep nav items horizontal */
-        align-items: center; /* Center nav items vertically */
-        margin-top: 1rem; /* Add some space above */
-    }
-
-    .nav-head a {
-        font-size: 1.2rem; /* Adjust nav item size for smaller screens */
-    }
-}
-
-@media (max-width: 480px) {
-    header {
-        font-size: 2rem; /* Further reduce header size */
-    }
-
-    .nav-head a {
-        font-size: 1rem; /* Further reduce nav item size */
-    }
-}
-
-.body-main{
+.body-main {
     color: #3c3c3c;
-    font-size: 30px;
-    margin-left: 10rem;
-    margin-top: 10rem;
+    font-size: 1.5rem;
+    margin: 5rem auto;
+    text-align: center; /* Center text for mobile */
+    max-width: 90%;
+}
 
-  }
-  
-  .span-x1 {
+.span-x1 {
     background-color: #ff4141;
     color: #fff;
     border-radius: 12px;
-  }
-  
-  .body-p2 {
-    font-size: 30px;
-    left: 10%;
+    padding: 0.3rem 0.5rem;
+}
+
+.body-p2 {
+    font-size: 1.5rem;
     color: #3c3c3c;
-  }
-  
-  .span-x2::before {
+    text-align: center;
+}
+
+.span-x2::before {
     color: #4b41ff;
     content: "Developer ⚒";
     animation: animate infinite 7s;
-  }
-  
-  @keyframes animate { 
-    
-    0% { 
+}
+
+@keyframes animate {
+    0% {
         content: "Developer ⚒";
         color: #4b41ff;
-    } 
-  
-    30% { 
-        content: "Designer 🎨"; 
+    }
+    30% {
+        content: "Designer 🎨";
         color: #ffde06;
-    } 
-  
-    55% { 
-        content: "Video Editor 📺"; 
+    }
+    55% {
+        content: "Video Editor 📺";
         color: #ff418a;
     }
-
     80% {
-        content: "Cinematographer  🎥";
+        content: "Cinematographer 🎥";
         color: #ff5500;
     }
-  } 
-
-.arrow {
-    transform: scaleX(-1);
-    margin-left: 8rem;
-    z-index: -1;
-    margin-top: -4rem;
 }
 
 h3 {
-    font-size: 40px;
-    margin-left: 9rem;
+    font-size: 2rem;
+    text-align: center;
+    margin: 1rem auto;
 }
 
 h4 {
-    font-size: 35px;
-    margin-top: 1rem;
+    font-size: 1.8rem;
+    margin: 0.5rem auto;
+    text-align: center;
 }
 
-.edit-box {
-    margin-top: -3rem;
-    margin-left: 15rem;
-    background-color: #fff; /* White background */
-    border: 2px solid red; /* Red stroke/border */
-    border-radius: 15px; /* Rounded corners */
-    padding: 30px; /* Padding inside the box */
-    box-shadow: 10px 10px 0px #ffde06; /* Yellow shadow at bottom-right */
-    max-width: 300px; /* Adjust width as needed */
-    position: relative; /* For positioning elements inside */
-}
-
-.text {
-    color: #ff5500;
-    margin-left: 5rem;
-    margin-top: -2rem;
-}
-
-.gfx-box {
-    margin-top: -3rem;
-    margin-left: 50rem;
-    background-color: #fff; 
-    border: 2px solid red; 
-    border-radius: 15px; 
-    padding: 30px; 
-    box-shadow: 10px 10px 0px #ffde06; 
-    max-width: 300px; 
-    position: relative; 
-}
-
-.arrow-rg {
-    margin-left: 70rem;
-    z-index: -1;
-    margin-top: -9rem;
-}
-
-.arrow {
-    transform: scaleX(-1);
-    margin-left: 8rem;
-    z-index: -1;
-    margin-top: -4rem;
-}
-
+.edit-box,
+.gfx-box,
 .code-box {
-    margin-top: -3rem;
-    margin-left: 15rem;
-    background-color: #fff; /* White background */
-    border: 2px solid red; /* Red stroke/border */
-    border-radius: 15px; /* Rounded corners */
-    padding: 30px; /* Padding inside the box */
-    box-shadow: 10px 10px 0px #ffde06; /* Yellow shadow at bottom-right */
-    max-width: 300px; /* Adjust width as needed */
-    position: relative; /* For positioning elements inside */
+    margin: 2rem auto;
+    background-color: #fff;
+    border: 2px solid red;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 5px 5px 0px #ffde06;
+    max-width: 90%;
+    text-align: center;
+}
+
+.arrow,
+.arrow-rg {
+    display: none; /* Hide arrows for mobile */
 }
 
 .footer-container {
     display: flex;
+    flex-wrap: wrap; /* Stack items on smaller screens */
     align-items: center;
-    justify-content: space-between;
+    justify-content: center; /* Center items */
     padding: 20px;
     background-color: #ffffff;
 }
 
 .text-left {
-    margin-right: 20px; /* Adjust text slightly to the right */
-    text-align: left;
     font-size: 1rem;
+    text-align: center;
+    margin: 1rem 0;
 }
 
 .social {
     display: flex;
-    align-items: center; /* Align icons vertically */
+    align-items: center;
     gap: 15px;
+    justify-content: center; /* Center icons */
 }
 
 .social a {
@@ -240,25 +167,56 @@ h4 {
     transition: transform 0.2s, color 0.2s;
 }
 
-.social a:hover {
-    transform: scale(1.1);
-}
-
 .social-icon {
     width: 40px;
     height: 40px;
 }
 
-.twitter-icon {
-    width: 25px;
-    height: 25px;
-}
-
-.github-icon {
-    width: 30px;
-    height: 30px;
-}
-
 .social a:hover img {
     filter: brightness(0) saturate(100%) invert(18%) sepia(86%) saturate(7231%) hue-rotate(1deg) brightness(94%) contrast(130%);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    header {
+        font-size: 2.5rem;
+    }
+
+    .nav-head {
+        flex-wrap: wrap; /* Stack nav items for smaller screens */
+        gap: 10px;
+    }
+
+    .nav-head a {
+        font-size: 1.2rem;
+    }
+
+    .body-main {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        font-size: 2rem;
+        margin-top: 1rem;
+    }
+
+    .nav-head {
+        font-size: 1rem;
+        flex-direction: column; /* Stack nav items vertically */
+        gap: 5px;
+    }
+
+    .body-main,
+    .body-p2 {
+        font-size: 1rem;
+    }
+
+    .edit-box,
+    .gfx-box,
+    .code-box {
+        font-size: 1rem;
+        padding: 10px;
+    }
 }
