@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rough.js/4.6.6/rough.min.js"></script>
     <style>
         :root {
             --bg-color: #121212;
@@ -18,19 +19,16 @@
             --border-color: rgba(255, 255, 255, 0.1);
             --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.2);
             --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            --yellow-accent: #ffeb3b; 
+            --shine-color: rgba(255, 255, 255, 0.22);
         }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         html {
             scroll-behavior: smooth;
         }
-
         body {
             font-family: var(--font-main);
             background-color: var(--bg-color);
@@ -42,11 +40,9 @@
             opacity: 0;
             transition: opacity 0.8s ease-in-out;
         }
-
         body.loaded {
             opacity: 1;
         }
-
         body::before {
             content: '';
             position: fixed;
@@ -59,30 +55,25 @@
             opacity: 0.1;
             z-index: -1;
         }
-
         .container {
             width: 100%;
             max-width: 700px;
             text-align: left;
         }
-
         .header {
             margin-bottom: 2.5rem;
         }
-
         .header-top {
             display: flex;
             justify-content: flex-end;
             align-items: center;
             margin-bottom: 2rem;
         }
-
         .controls {
             display: flex;
             align-items: center;
             gap: 1rem;
         }
-
         .research-link {
             display: flex;
             align-items: center;
@@ -97,19 +88,16 @@
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
-
         .research-link:hover {
             color: var(--text-primary);
             border-color: var(--accent-color);
         }
-
         .research-icon {
             width: 16px;
             height: 16px;
             margin-right: 0.5rem;
             color: var(--accent-color);
         }
-
         .theme-toggle {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -119,55 +107,82 @@
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
-
         .theme-toggle:hover {
             border-color: var(--accent-color);
             transform: translateY(-2px);
         }
-
         .toggle-icon {
             width: 20px;
             height: 20px;
             color: var(--text-primary);
         }
-
         body.dark .sun-icon { display: block; }
         body.dark .moon-icon { display: none; }
         body:not(.dark) .sun-icon { display: none; }
         body:not(.dark) .moon-icon { display: block; }
-
         .hero {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
         }
-
         .profile-container {
             display: flex;
             align-items: center;
             gap: 1.5rem;
             margin-bottom: 1rem;
+            position: relative;
         }
-
         .profile-image {
             width: 70px;
             height: 70px;
             border-radius: 50%;
             object-fit: cover;
+            transition: transform 0.3s ease;
         }
-
+        .profile-container:hover .profile-image {
+            transform: scale(1.05);
+        }
+        .profile-hover-text {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 0.7rem 1.2rem;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-light);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            opacity: 0;
+            transform: translateY(-6px);
+            pointer-events: none;
+        }
+        .profile-container:hover .profile-hover-text {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .profile-hover-arrow {
+            width: 28px;
+            height: 20px;
+            color: var(--text-secondary);
+        }
         .name {
             font-size: 2rem;
             font-weight: 700;
             color: var(--text-primary);
         }
-
         .handle {
             font-size: 0.9rem;
             color: var(--text-secondary);
             font-weight: 400;
         }
-
         .tagline {
             font-size: 0.9rem;
             color: var(--text-secondary);
@@ -175,13 +190,11 @@
             margin-bottom: 1.5rem;
             max-width: 500px;
         }
-
         .icon-links {
             display: flex;
             gap: 0.75rem;
             margin-bottom: 2.5rem;
         }
-
         .icon-links a {
             display: flex;
             align-items: center;
@@ -193,42 +206,37 @@
             border-radius: 8px;
             transition: all 0.2s ease;
         }
-
         .icon-links a:hover {
             transform: translateY(-3px);
             border-color: var(--accent-color);
             box-shadow: 0 2px 8px rgba(255, 77, 77, 0.2);
         }
-
         .social-icon {
             width: 18px;
             height: 18px;
             color: var(--text-secondary);
             transition: color 0.2s ease;
         }
-
         .icon-links a:hover .social-icon {
             color: var(--text-primary);
         }
-
         .section {
             margin-bottom: 2.5rem;
         }
-
         .section-title {
             font-size: 1.25rem;
             font-weight: 600;
             color: var(--text-primary);
             margin-bottom: 1rem;
         }
-
         .skills-grid {
             display: flex;
             flex-wrap: wrap;
             gap: 0.75rem;
         }
-
         .skill-card {
+            position: relative;
+            overflow: hidden;
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -236,26 +244,42 @@
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            transition: all 0.2s ease;
+            transition: all 0.25s ease;
         }
-
         .skill-card:hover {
             transform: translateY(-3px);
             border-color: var(--accent-color);
         }
-
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent 35%, var(--shine-color) 50%, transparent 65%);
+            animation: shine-single 5.5s infinite linear;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+        @keyframes shine-single {
+            0%   { transform: translateX(-100%); }
+            25%  { transform: translateX(100%); }
+            100% { transform: translateX(100%); }
+        }
+        .skill-card:hover::before {
+            animation-duration: 3.2s;
+            opacity: 0.85;
+        }
         .skill-icon {
             width: 20px;
             height: 20px;
         }
-
         .skill-card span {
             font-size: 0.875rem;
             font-weight: 500;
             color: var(--text-secondary);
         }
-
-        /* Github Calendar Styles */
         .github-calendar {
             width: 100%;
             background: var(--card-bg);
@@ -265,127 +289,96 @@
             margin-top: 1rem;
             overflow: hidden;
         }
-
         .github-calendar img {
             width: 100%;
             height: auto;
             filter: grayscale(0.2);
         }
-
         body:not(.dark) .github-calendar img {
             filter: invert(0.9) hue-rotate(180deg);
         }
-
         .interests-container {
             display: flex;
             flex-direction: column;
             gap: 1rem;
         }
-
         .interest-item {
             display: flex;
             align-items: flex-start;
             gap: 1rem;
         }
-
         .interest-icon {
             width: 20px;
             height: 20px;
             color: var(--accent-color);
             flex-shrink: 0;
             margin-top: 3px;
+            transition: transform 0.3s ease;
         }
-
+        .interest-item:hover .interest-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
         .interest-text h3 {
             font-size: 1rem;
             font-weight: 600;
             margin-bottom: 0.25rem;
             color: var(--text-primary);
         }
-
         .interest-text p {
             font-size: 0.875rem;
             color: var(--text-secondary);
             line-height: 1.5;
         }
-
         .popup, .research-popup {
             position: fixed;
             bottom: 20px;
             left: 50%;
             transform: translate(-50%, 10px);
-            background: #2a2a2a;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            padding: 1rem 2rem;
+            border-radius: 12px;
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 1rem;
             opacity: 0;
             transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
             z-index: 1000;
             border: 1px solid var(--border-color);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            box-shadow: var(--shadow-light);
             pointer-events: none;
+            backdrop-filter: blur(10px);
         }
-
-        .research-popup {
-            background: #fff9c4; 
-            color: #333;
-            border-color: #fbc02d;
-        }
-
         .popup.active, .research-popup.active {
             opacity: 1;
             transform: translate(-50%, 0);
             pointer-events: all;
         }
-
         .popup-icon, .research-popup-icon {
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             color: var(--accent-color);
         }
-
-        .research-popup-icon {
-            color: #775500; 
-        }
-
         .popup p, .research-popup p {
-            font-size: 0.875rem;
+            font-size: 1rem;
             font-weight: 500;
-            color: var(--text-primary);
+            margin: 0;
         }
-
-        .research-popup p {
-            color: #333;
-        }
-
         body:not(.dark) {
             --bg-color: #f0f0f0;
             --card-bg: #ffffff;
             --text-primary: #1a1a1a;
             --text-secondary: #5c5c5c;
             --border-color: #e0e0e0;
+            --accent-color: #ff4d4d;
+            --shine-color: rgba(0, 0, 0, 0.12);
         }
-
         body:not(.dark)::before {
             background-image: radial-gradient(circle, #ccc 1px, transparent 1px);
         }
-
         body:not(.dark) .toggle-icon {
             color: #1a1a1a;
         }
-
-        body:not(.dark) .popup {
-            background: #ffffff;
-        }
-
-        body:not(.dark) .research-popup {
-            background: #303030;
-            border-color: #775500;
-        }
-
         @media (max-width: 480px) {
             body { padding: 1rem; }
             .container { max-width: 100%; }
@@ -395,61 +388,9 @@
             .section-title { font-size: 1.1rem; }
         }
     </style>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            document.body.classList.add('loaded');
-
-            const themeToggle = document.getElementById('theme-toggle');
-            const cvBtn = document.getElementById('cv-btn');
-            const researchLink = document.querySelector('.research-link');
-            const popup = document.getElementById('popup');
-            const researchPopup = document.getElementById('research-popup');
-            let popupTimeout, researchPopupTimeout;
-
-            const setTheme = (isDark) => {
-                document.body.classList.toggle('dark', isDark);
-                localStorage.setItem('isDarkMode', isDark);
-            };
-
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const savedTheme = localStorage.getItem('isDarkMode');
-
-            if (savedTheme !== null) {
-                setTheme(savedTheme === 'true');
-            } else {
-                setTheme(prefersDark);
-            }
-
-            themeToggle.addEventListener('click', () => {
-                const isDark = document.body.classList.contains('dark');
-                setTheme(!isDark);
-            });
-
-            cvBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                if (popupTimeout) clearTimeout(popupTimeout);
-                popup.classList.add('active');
-                popupTimeout = setTimeout(() => {
-                    popup.classList.remove('active');
-                }, 2500);
-            });
-
-            researchLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                if (researchPopupTimeout) clearTimeout(researchPopupTimeout);
-                researchPopup.classList.add('active');
-                researchPopupTimeout = setTimeout(() => {
-                    researchPopup.classList.remove('active');
-                }, 2500);
-            });
-        });
-
-        document.addEventListener('contextmenu', function(event) {
-            event.preventDefault();
-        });
-    </script>
 </head>
 <body class="dark">
+
     <div class="container">
         <header class="header">
             <div class="header-top">
@@ -467,6 +408,10 @@
             <div class="hero">
                 <div class="profile-container">
                     <img src="assets/suvroo.png" alt="Profile picture of Suvro" class="profile-image">
+                    <div class="profile-hover-text">
+                        <canvas class="profile-hover-arrow"></canvas>
+                        Hey its Suvro!
+                    </div>
                     <div class="name-container">
                         <h1 class="name">Suv</h1>
                         <p class="handle">@elitsuv</p>
@@ -496,11 +441,11 @@
                         <span>Python</span>
                     </div>
                     <div class="skill-card">
-                        <svg class="skill-icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title>file_type_numpy</title><polygon points="14.048 7.689 9.405 5.327 4.309 7.89 9.078 10.303 14.048 7.689" style="fill:#4dabcf"/><polygon points="16.177 8.771 21.045 11.247 15.994 13.803 11.218 11.386 16.177 8.771" style="fill:#4dabcf"/><polygon points="22.678 5.363 27.679 7.89 23.207 10.153 18.328 7.674 22.678 5.363" style="fill:#4dabcf"/><polygon points="20.526 4.274 16.023 2 11.57 4.239 16.209 6.597 20.526 4.274" style="fill:#4dabcf"/><polygon points="17.006 23.809 17.006 30 22.46 27.258 22.454 21.064 17.006 23.809" style="fill:#4dabcf"/><polygon points="22.452 18.903 22.446 12.774 17.006 15.499 17.006 21.63 22.452 18.903" style="fill:#4dabcf"/><polygon points="29 17.754 29 23.969 24.348 26.308 24.345 20.122 29 17.754" style="fill:#4dabcf"/><polygon points="29 15.581 29 9.491 24.339 11.826 24.343 17.967 29 15.581" style="fill:#4dabcf"/><path d="M15.08,15.5l-3.674-1.861v8.045S6.913,12.05,6.5,11.185a.9.9,0,0,0-.331-.264C5.361,10.5,3,9.29,3,9.29V23.5L6.266,25.26V17.832s4.445,8.607,4.49,8.7a4.026,4.026,0,0,0,.968,1.32c.635.423,3.357,2.073,3.357,2.073Z" style="fill:#4d77cf"/></svg>
+                        <svg class="skill-icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><polygon points="14.048 7.689 9.405 5.327 4.309 7.89 9.078 10.303 14.048 7.689" style="fill:#4dabcf"/><polygon points="16.177 8.771 21.045 11.247 15.994 13.803 11.218 11.386 16.177 8.771" style="fill:#4dabcf"/><polygon points="22.678 5.363 27.679 7.89 23.207 10.153 18.328 7.674 22.678 5.363" style="fill:#4dabcf"/><polygon points="20.526 4.274 16.023 2 11.57 4.239 16.209 6.597 20.526 4.274" style="fill:#4dabcf"/><polygon points="17.006 23.809 17.006 30 22.46 27.258 22.454 21.064 17.006 23.809" style="fill:#4dabcf"/><polygon points="22.452 18.903 22.446 12.774 17.006 15.499 17.006 21.63 22.452 18.903" style="fill:#4dabcf"/><polygon points="29 17.754 29 23.969 24.348 26.308 24.345 20.122 29 17.754" style="fill:#4dabcf"/><polygon points="29 15.581 29 9.491 24.339 11.826 24.343 17.967 29 15.581" style="fill:#4dabcf"/><path d="M15.08,15.5l-3.674-1.861v8.045S6.913,12.05,6.5,11.185a.9.9,0,0,0-.331-.264C5.361,10.5,3,9.29,3,9.29V23.5L6.266,25.26V17.832s4.445,8.607,4.49,8.7a4.026,4.026,0,0,0,.968,1.32c.635.423,3.357,2.073,3.357,2.073Z" style="fill:#4d77cf"/></svg>
                         <span>NumPy</span>
                     </div>
                     <div class="skill-card">
-                        <svg class="skill-icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title>pandas</title><path fill="#e80074" d="M11.849 2.813h3.269v6.787h-3.268zM11.849 16.755h3.269v6.789h-3.268zM11.849 11.582h3.269v3.203h-3.268zM6.598 8.393h3.268v22.563h-3.269zM16.992 22.356h3.269v6.787h-3.269zM16.992 8.401h3.269v6.787h-3.269zM16.992 17.171h3.269v3.203h-3.269zM22.134 1.045h3.269v22.563h-3.269z"/></svg>
+                        <svg class="skill-icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path fill="#e80074" d="M11.849 2.813h3.269v6.787h-3.268zM11.849 16.755h3.269v6.789h-3.268zM11.849 11.582h3.269v3.203h-3.268zM6.598 8.393h3.268v22.563h-3.269zM16.992 22.356h3.269v6.787h-3.269zM16.992 8.401h3.269v6.787h-3.269zM16.992 17.171h3.269v3.203h-3.269zM22.134 1.045h3.269v22.563h-3.269z"/></svg>
                         <span>Pandas</span>
                     </div>
                     <div class="skill-card">
@@ -516,7 +461,6 @@
                         <span>CSS</span>
                     </div>
                 </div>
-
                 <div class="github-calendar">
                     <img src="https://ghchart.rshah.org/ff4d4d/elitsuv" alt="elitsuv's Github Charts" />
                 </div>
@@ -555,11 +499,55 @@
         <svg class="popup-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
         <p>Still Building!</p>
     </div>
-
-    <div id="research-popup" class="research-popup">
+    <div id="research-popup" class="popup research-popup">
         <svg class="research-popup-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
         <p>Not yet done!</p>
     </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+            const themeToggle = document.getElementById('theme-toggle');
+            const cvBtn = document.getElementById('cv-btn');
+            const researchLink = document.querySelector('.research-link');
+            const popup = document.getElementById('popup');
+            const researchPopup = document.getElementById('research-popup');
+            let popupTimeout, researchPopupTimeout;
+
+            const setTheme = (isDark) => {
+                document.body.classList.toggle('dark', isDark);
+                localStorage.setItem('isDarkMode', isDark);
+            };
+
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const savedTheme = localStorage.getItem('isDarkMode');
+            if (savedTheme !== null) {
+                setTheme(savedTheme === 'true');
+            } else {
+                setTheme(prefersDark);
+            }
+
+            themeToggle.addEventListener('click', () => {
+                const isDark = document.body.classList.contains('dark');
+                setTheme(!isDark);
+            });
+
+            cvBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (popupTimeout) clearTimeout(popupTimeout);
+                popup.classList.add('active');
+                popupTimeout = setTimeout(() => popup.classList.remove('active'), 2500);
+            });
+
+            researchLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (researchPopupTimeout) clearTimeout(researchPopupTimeout);
+                researchPopup.classList.add('active');
+                researchPopupTimeout = setTimeout(() => researchPopup.classList.remove('active'), 2500);
+            });
+        });
+
+        document.addEventListener('contextmenu', e => e.preventDefault());
+    </script>
 </body>
 </html>
-
